@@ -1,5 +1,7 @@
 package com.spring.orm.CrudOperations;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -15,9 +17,23 @@ public class App
         StudentDao studentdao = context.getBean("studentDao", StudentDao.class);
         
         Student student = new Student();
-        student.setName("Nikita");
-        student.setCity("Jaipur");
-        studentdao.insert(student);
+        student.setName("Mansi");
+        student.setCity("Dehradun");
+        
+        int insertResult = studentdao.insert(student);
+        System.out.println(insertResult);
+        
+        Student resultStudent = studentdao.getStudent(1);
+        System.out.println(resultStudent);
+        
+        List<Student> resultList = studentdao.getAllStudents();
+        for(Student s : resultList) {
+            System.out.println(s);
+        }
+        
+        studentdao.updateStudent(student);
+        
+        studentdao.deleteStudent(2);
         
     }
 }
